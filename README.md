@@ -65,7 +65,7 @@
 
 ## 🚀 Live Demo <a name="live-demo"></a>
 
-- [Live Demo Link](https://github.com/Eccb7/To-do-List/)
+- [Live Demo Link](https://eccb7.github.io/To-do-List/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
