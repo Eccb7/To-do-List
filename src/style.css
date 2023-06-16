@@ -1,0 +1,88 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+.container {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 20px;
+  max-width: 400px;
+  width: 100%;
+}
+
+h3 {
+  display: inline-block;
+  margin: 0;
+}
+
+#header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 90px;
+}
+
+#refreshButton {
+  border: none;
+  padding: 5px 10px;
+  margin-left: 10px;
+  font-weight: bold;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
+
+#taskInputContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#taskInput {
+  flex-grow: 1;
+  padding: 5px;
+}
+
+#addTaskButton {
+  /* border: none; */
+  padding: 5px 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#todo-list {
+  margin: 10px 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.details {
+  margin-left: auto;
+  padding-left: 50px;
+  display: flex;
+  align-items: center;
+}
+
+.details input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.details .dots {
+  cursor: pointer;
+  margin-left: 5px;
+}
