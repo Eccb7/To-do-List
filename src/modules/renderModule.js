@@ -1,5 +1,3 @@
-// renderModule.js
-
 import {
   getTasksFromStorage, saveTasksToStorage, editTaskDescription, deleteTask,
 } from './taskModule.js';

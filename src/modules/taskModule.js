@@ -1,5 +1,3 @@
-// taskModule.js
-
 // Retrieve tasks from local storage
 const getTasksFromStorage = () => {
   const tasksJSON = localStorage.getItem('tasks');
