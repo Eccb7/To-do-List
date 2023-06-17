@@ -1,8 +1,9 @@
 import './style.css';
 import {
-  getTasksFromStorage, saveTasksToStorage,
+  getTasksFromStorage, saveTasksToStorage, /* editTaskDescription, deleteTask, */
 } from './modules/taskModule.js';
 import renderTasks from './modules/renderModule.js';
+// import updateTaskStatus from './modules/statusModule.js'; // Import the new module
 
 // Add a new task
 const addTask = (description) => {
