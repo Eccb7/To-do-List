@@ -1,5 +1,3 @@
-// index.js
-
 import './style.css';
 import {
   getTasksFromStorage, saveTasksToStorage, /* editTaskDescription, deleteTask, */
