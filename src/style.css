@@ -47,7 +47,7 @@ h3 {
 }
 
 #addTaskButton {
-  /* border: none; */
+  border: none;
   padding: 5px 10px;
   font-weight: bold;
   cursor: pointer;
@@ -66,11 +66,6 @@ li {
   align-items: center;
 }
 
-.completed {
-  text-decoration: line-through;
-  color: #999;
-}
-
 .details {
   margin-left: auto;
   padding-left: 50px;
@@ -78,11 +73,60 @@ li {
   align-items: center;
 }
 
+li .details {
+  margin-left: 30px;
+  flex-grow: 1;
+}
+
+.task-description {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.edit-button,
+.delete-button {
+  font-size: 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.delete-icon {
+  color: red;
+}
+
+.delete-icon::before {
+  content: "\ \00D7";
+  font-size: 24px;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #999;
+}
+
 .details input[type="checkbox"] {
-  margin-right: 5px;
+  margin-left: 10px;
 }
 
 .details .dots {
   cursor: pointer;
   margin-left: 5px;
+}
+
+button[type="reset"] {
+  display: block;
+  margin: 0 auto;
+  border: #aea8a8;
+  background: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 0;
+
+  /* text-decoration: underline; */
+  transition: color 0.3s;
+}
+
+button[type="reset"]:hover {
+  color: rgb(2, 2, 255);
 }

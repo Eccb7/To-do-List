@@ -1,54 +1,55 @@
 import './style.css';
+import {
+  getTasksFromStorage, saveTasksToStorage,
+} from './modules/taskModule.js';
+import renderTasks from './modules/renderModule.js';
 
-document.addEventListener('DOMContentLoaded', () => {
-  const taskInput = document.getElementById('taskInput');
-  const addTaskButton = document.getElementById('addTaskButton');
-  const todoList = document.getElementById('todo-list');
-
-  const tasks = [
-    { description: 'Task 1', completed: false, index: 1 },
-    { description: 'Task 2', completed: true, index: 2 },
-    { description: 'Task 3', completed: false, index: 3 },
-  ];
-
-  function renderTasks() {
-    // Clear existing tasks
-    todoList.innerHTML = '';
-
-    // Sort tasks by index
-    tasks.sort((a, b) => a.index - b.index);
-
-    // Create and append list items for each task
-    tasks.forEach((task) => {
-      const taskItem = document.createElement('li');
-
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.checked = task.completed;
-      taskItem.appendChild(checkbox);
-
-      const taskLabel = document.createElement('label');
-      taskLabel.innerText = task.description;
-      taskItem.appendChild(taskLabel);
-
-      todoList.appendChild(taskItem);
-    });
-  }
-
-  // Render tasks on page load
+// Add a new task
+const addTask = (description) => {
+  const tasks = getTasksFromStorage();
+  const newTask = {
+    description,
+    completed: false,
+    index: tasks.length + 1,
+  };
+  tasks.push(newTask);
+  saveTasksToStorage(tasks);
   renderTasks();
+};
+
+// Clear completed tasks
+const clearCompletedTasks = () => {
+  let tasks = getTasksFromStorage();
+  tasks = tasks.filter((task) => !task.completed);
+  tasks.forEach((task, i) => {
+    task.index = i + 1;
+  });
+  saveTasksToStorage(tasks);
+  renderTasks();
+};
+
+// Event listener for adding a task
+document.addEventListener('DOMContentLoaded', () => {
+  const addTaskButton = document.getElementById('addTaskButton');
+  const clearButton = document.querySelector('button[type="reset"]');
+  const refreshButton = document.getElementById('refreshButton');
 
   addTaskButton.addEventListener('click', () => {
+    const taskInput = document.getElementById('taskInput');
     const taskText = taskInput.value;
     if (taskText.trim() !== '') {
-      const newTask = {
-        description: taskText,
-        completed: false,
-        index: tasks.length + 1,
-      };
-      tasks.push(newTask);
-      renderTasks();
+      addTask(taskText);
       taskInput.value = '';
     }
   });
+
+  clearButton.addEventListener('click', () => {
+    clearCompletedTasks();
+  });
+
+  refreshButton.addEventListener('click', () => {
+    window.location.reload();
+  });
+
+  renderTasks();
 });

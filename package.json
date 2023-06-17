@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/Eccb7/To-do-List/issues"
   },
-  "homepage": "https://github.com/Eccb7/To-do-List/",
+  "homepage": "https://Eccb7.github.io/To-do-List/",
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.8.1",
