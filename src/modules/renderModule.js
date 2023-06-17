@@ -1,8 +1,8 @@
 import {
-  getTasksFromStorage, saveTasksToStorage, editTaskDescription, deleteTask,
+  getTasksFromStorage, /* saveTasksToStorage, */ editTaskDescription, deleteTask,
 } from './taskModule.js';
+import updateTaskStatus from './statusModule.js';
 
-// Render tasks
 const renderTasks = () => {
   const todoList = document.getElementById('todo-list');
   todoList.innerHTML = '';
@@ -36,8 +36,7 @@ const renderTasks = () => {
     todoList.appendChild(taskItem);
 
     checkbox.addEventListener('change', () => {
-      task.completed = checkbox.checked;
-      saveTasksToStorage(tasks);
+      updateTaskStatus(task.index, checkbox.checked); // Call the new module
     });
 
     editButton.addEventListener('click', () => {
