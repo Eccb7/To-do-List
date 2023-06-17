@@ -1,8 +1,8 @@
 import './style.css';
 import {
-  getTasksFromStorage, saveTasksToStorage, /* editTaskDescription, deleteTask, */
+  getTasksFromStorage, saveTasksToStorage,
 } from './modules/taskModule.js';
-import { renderTasks } from './modules/renderModule.js';
+import renderTasks from './modules/renderModule.js';
 
 // Add a new task
 const addTask = (description) => {
@@ -14,7 +14,7 @@ const addTask = (description) => {
   };
   tasks.push(newTask);
   saveTasksToStorage(tasks);
-  renderTasks(tasks);
+  renderTasks();
 };
 
 // Clear completed tasks
@@ -25,7 +25,7 @@ const clearCompletedTasks = () => {
     task.index = i + 1;
   });
   saveTasksToStorage(tasks);
-  renderTasks(tasks);
+  renderTasks();
 };
 
 // Event listener for adding a task
@@ -51,6 +51,5 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.reload();
   });
 
-  const tasks = getTasksFromStorage();
-  renderTasks(tasks);
+  renderTasks();
 });

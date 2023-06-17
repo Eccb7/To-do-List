@@ -68,4 +68,4 @@ const renderTasks = () => {
   });
 };
 
-export { renderTasks };
+export default renderTasks;
