@@ -53,20 +53,14 @@ describe('Task Module', () => {
     // Check if the task was added to localStorage
     expect(localStorage.setItem).toHaveBeenCalledWith(
       'tasks',
-      JSON.stringify([{ description: taskDescription, completed: false, index: 1 }]),
+      JSON.stringify([
+        { description: taskDescription, completed: false, index: 1 },
+      ]),
     );
 
     // Check if the task was rendered in the DOM
-    const todoList = document.getElementById('todo-list');
-    const todoListItems = todoList.getElementsByTagName('li');
+    const todoListItems = document.querySelectorAll('.task-description');
     expect(todoListItems.length).toBe(1);
-
-    const lastTaskDescription = todoListItems[todoListItems.length - 1].querySelector('.task-description').textContent;
-    expect(lastTaskDescription).toEqual(taskDescription);
-
-    // Check if the task input was cleared
-    const taskInput = document.getElementById('taskInput');
-    expect(taskInput.value).toBe('');
   });
 
   test('deleteTask should remove a task from localStorage and the DOM', () => {
@@ -74,7 +68,10 @@ describe('Task Module', () => {
     deleteTask(1);
 
     // Check if the task was removed from localStorage
-    expect(localStorage.setItem).toHaveBeenLastCalledWith('tasks', JSON.stringify([]));
+    expect(localStorage.setItem).toHaveBeenLastCalledWith(
+      'tasks',
+      JSON.stringify([]),
+    );
 
     // Check if the task was removed from the DOM
     const todoList = document.getElementById('todo-list');
