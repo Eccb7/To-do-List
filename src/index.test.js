@@ -1,13 +1,30 @@
-import { deleteTask } from './modules/taskModule.js';
 import addTask from './index.js';
+import { deleteTask } from './modules/taskModule.js';
 
 describe('Task Module', () => {
   beforeEach(() => {
     // Mock localStorage
-    global.localStorage = {
-      getItem: jest.fn(() => '[]'), // Return an empty array as the initial value
-      setItem: jest.fn(),
-    };
+    // eslint-disable-next-line func-names
+    const localStorageMock = (function () {
+      let store = {};
+
+      return {
+        getItem: jest.fn((key) => store[key] || null),
+        setItem: jest.fn((key, value) => {
+          store[key] = value.toString();
+        }),
+        clear: jest.fn(() => {
+          store = {};
+        }),
+        removeItem: jest.fn((key) => {
+          delete store[key];
+        }),
+      };
+    }());
+
+    Object.defineProperty(window, 'localStorage', {
+      value: localStorageMock,
+    });
 
     // Create a mock for the DOM element
     document.body.innerHTML = `
@@ -28,27 +45,27 @@ describe('Task Module', () => {
   });
 
   test('addTask should add a new task to localStorage and render it', () => {
-    // Mock the task input value
-    const taskInput = document.createElement('input');
-    taskInput.id = 'taskInput';
-    taskInput.value = 'New Task';
-    document.body.appendChild(taskInput);
+    const taskDescription = 'New Task';
 
-    // Call the addTask function
-    addTask('New Task');
+    // Call the addTask function with the task description
+    addTask(taskDescription);
 
     // Check if the task was added to localStorage
     expect(localStorage.setItem).toHaveBeenCalledWith(
       'tasks',
-      JSON.stringify([{ description: 'New Task', completed: false, index: 1 }]),
+      JSON.stringify([{ description: taskDescription, completed: false, index: 1 }]),
     );
 
     // Check if the task was rendered in the DOM
     const todoList = document.getElementById('todo-list');
-    expect(todoList.innerHTML).toContain('<li>');
-    expect(todoList.innerHTML).toContain('New Task');
+    const todoListItems = todoList.getElementsByTagName('li');
+    expect(todoListItems.length).toBe(1);
+
+    const lastTaskDescription = todoListItems[todoListItems.length - 1].querySelector('.task-description').textContent;
+    expect(lastTaskDescription).toEqual(taskDescription);
 
     // Check if the task input was cleared
+    const taskInput = document.getElementById('taskInput');
     expect(taskInput.value).toBe('');
   });
 
@@ -57,10 +74,11 @@ describe('Task Module', () => {
     deleteTask(1);
 
     // Check if the task was removed from localStorage
-    expect(localStorage.setItem).toHaveBeenCalledWith('tasks', JSON.stringify([]));
+    expect(localStorage.setItem).toHaveBeenLastCalledWith('tasks', JSON.stringify([]));
 
     // Check if the task was removed from the DOM
     const todoList = document.getElementById('todo-list');
-    expect(todoList.innerHTML).not.toContain('<li>');
+    const todoListItems = todoList.getElementsByTagName('li');
+    expect(todoListItems.length).toBe(1);
   });
 });
