@@ -1,11 +1,9 @@
 import './style.css';
 import {
-  getTasksFromStorage, saveTasksToStorage, /* editTaskDescription, deleteTask, */
+  getTasksFromStorage, saveTasksToStorage,
 } from './modules/taskModule.js';
 import renderTasks from './modules/renderModule.js';
-// import updateTaskStatus from './modules/statusModule.js'; // Import the new module
 
-// Add a new task
 const addTask = (description) => {
   const tasks = getTasksFromStorage();
   const newTask = {
@@ -18,7 +16,6 @@ const addTask = (description) => {
   renderTasks();
 };
 
-// Clear completed tasks
 const clearCompletedTasks = () => {
   let tasks = getTasksFromStorage();
   tasks = tasks.filter((task) => !task.completed);
@@ -29,7 +26,6 @@ const clearCompletedTasks = () => {
   renderTasks();
 };
 
-// Event listener for adding a task
 document.addEventListener('DOMContentLoaded', () => {
   const addTaskButton = document.getElementById('addTaskButton');
   const clearButton = document.querySelector('button[type="reset"]');
