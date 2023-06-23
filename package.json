@@ -6,7 +6,10 @@
   "scripts": {
     "build": "webpack",
     "deploy": "gh-pages -d dist",
-    "predeploy": "npm run build"
+    "dev": "webpack-dev-server",
+    "predeploy": "npm run build",
+    "start": "webpack-dev-server",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -20,7 +23,13 @@
   },
   "homepage": "https://Eccb7.github.io/To-do-List/",
   "devDependencies": {
+    "@babel/core": "^7.22.5",
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.22.5",
+    "@babel/preset-env": "^7.22.5",
+    "@babel/preset-react": "^7.22.5",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^29.5.0",
     "css-loader": "^6.8.1",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
@@ -28,6 +37,8 @@
     "gh-pages": "^5.0.0",
     "hint": "^7.1.9",
     "html-webpack-plugin": "^5.5.3",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.5.0",
     "style-loader": "^3.3.3",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",

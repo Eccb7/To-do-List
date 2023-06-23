@@ -54,3 +54,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderTasks();
 });
+
+export default addTask;
