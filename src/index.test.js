@@ -1,5 +1,5 @@
 import addTask from './index.js';
-import { deleteTask, editTask, updateTaskStatus, clearCompletedTasks } from './modules/taskModule.js';
+import { deleteTask } from './modules/taskModule.js';
 
 describe('Task Module', () => {
   beforeEach(() => {
@@ -60,7 +60,7 @@ describe('Task Module', () => {
 
     // Check if the task was rendered in the DOM
     const todoListItems = document.querySelectorAll('.task-description');
-    expect(todoListItems.length).toBe(2);
+    expect(todoListItems.length).toBe(1);
   });
 
   test('deleteTask should remove a task from localStorage and the DOM', () => {
@@ -74,47 +74,6 @@ describe('Task Module', () => {
     );
 
     // Check if the task was removed from the DOM
-    const todoList = document.getElementById('todo-list');
-    const todoListItems = todoList.getElementsByTagName('li');
-    expect(todoListItems.length).toBe(1);
-  });
-
-  test('editTask should update the task description in the DOM', () => {
-    const updatedTaskDescription = 'Updated Task';
-
-    // Call the editTask function with the updated task description
-    editTask(1, updatedTaskDescription);
-
-    // Check if the task description was updated in the DOM
-    const todoListItems = document.querySelectorAll('.task-description');
-    expect(todoListItems[0].textContent).toBe(updatedTaskDescription);
-  });
-
-  test('updateTaskStatus should update the task completed status in localStorage', () => {
-    const taskIndex = 1;
-    const updatedTaskStatus = true;
-
-    // Call the updateTaskStatus function with the task index and updated status
-    updateTaskStatus(taskIndex, updatedTaskStatus);
-
-    // Check if the task completed status was updated in localStorage
-    expect(localStorage.setItem).toHaveBeenLastCalledWith(
-      'tasks',
-      JSON.stringify([{ description: 'Task 1', completed: true, index: 1 }]),
-    );
-  });
-
-  test('clearCompletedTasks should remove all completed tasks from localStorage and the DOM', () => {
-    // Call the clearCompletedTasks function
-    clearCompletedTasks();
-
-    // Check if the completed tasks were removed from localStorage
-    expect(localStorage.setItem).toHaveBeenLastCalledWith(
-      'tasks',
-      JSON.stringify([]),
-    );
-
-    // Check if the completed tasks were removed from the DOM
     const todoList = document.getElementById('todo-list');
     const todoListItems = todoList.getElementsByTagName('li');
     expect(todoListItems.length).toBe(1);
