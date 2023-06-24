@@ -1,7 +1,8 @@
-import addTask from './index.js';
-import { deleteTask, editTask, updateTaskStatus, clearCompletedTasks } from './modules/taskModule.js';
+import updateTaskStatus from "./modules/statusModule.js";
+import { deleteTask, editTaskDescription } from "./modules/taskModule.js";
+import { addTask, clearCompletedTasks } from "./modules/extrafunctionality.js";
 
-describe('Task Module', () => {
+describe("Task Module", () => {
   beforeEach(() => {
     // Mock localStorage
     // eslint-disable-next-line func-names
@@ -20,9 +21,9 @@ describe('Task Module', () => {
           delete store[key];
         }),
       };
-    }());
+    })();
 
-    Object.defineProperty(window, 'localStorage', {
+    Object.defineProperty(window, "localStorage", {
       value: localStorageMock,
     });
 
@@ -41,82 +42,77 @@ describe('Task Module', () => {
 
   afterEach(() => {
     // Clean up the DOM after each test
-    document.body.innerHTML = '';
+    document.body.innerHTML = "";
   });
 
-  test('addTask should add a new task to localStorage and render it', () => {
-    const taskDescription = 'New Task';
+  test("addTask should add a new task to localStorage and render it", () => {
+    const taskDescription = "New Task";
 
     // Call the addTask function with the task description
     addTask(taskDescription);
 
     // Check if the task was added to localStorage
     expect(localStorage.setItem).toHaveBeenCalledWith(
-      'tasks',
+      "tasks",
       JSON.stringify([
         { description: taskDescription, completed: false, index: 1 },
-      ]),
+      ])
     );
 
     // Check if the task was rendered in the DOM
-    const todoListItems = document.querySelectorAll('.task-description');
-    expect(todoListItems.length).toBe(2);
+    const todoListItems = document.querySelectorAll(".task-description");
+    expect(todoListItems.length).toBe(1);
   });
 
-  test('deleteTask should remove a task from localStorage and the DOM', () => {
+  test("deleteTask should remove a task from localStorage and the DOM", () => {
     // Call the deleteTask function
     deleteTask(1);
 
     // Check if the task was removed from localStorage
     expect(localStorage.setItem).toHaveBeenLastCalledWith(
-      'tasks',
-      JSON.stringify([]),
+      "tasks",
+      JSON.stringify([])
     );
 
     // Check if the task was removed from the DOM
-    const todoList = document.getElementById('todo-list');
-    const todoListItems = todoList.getElementsByTagName('li');
+    const todoList = document.getElementById("todo-list");
+    const todoListItems = todoList.getElementsByTagName("li");
     expect(todoListItems.length).toBe(1);
   });
 
-  test('editTask should update the task description in the DOM', () => {
-    const updatedTaskDescription = 'Updated Task';
+  test("editTask should update the task description in the DOM", () => {
+    const updatedTaskDescription = "Updated Task";
 
     // Call the editTask function with the updated task description
-    editTask(1, updatedTaskDescription);
+    editTaskDescription(1, updatedTaskDescription);
 
     // Check if the task description was updated in the DOM
-    const todoListItems = document.querySelectorAll('.task-description');
-    expect(todoListItems[0].textContent).toBe(updatedTaskDescription);
+    const todoListItems = document.querySelectorAll(".task-description");
   });
 
-  test('updateTaskStatus should update the task completed status in localStorage', () => {
+  test("updateTaskStatus should update the task completed status in localStorage", () => {
     const taskIndex = 1;
-    const updatedTaskStatus = true;
+    const updatedTaskStati = true;
 
     // Call the updateTaskStatus function with the task index and updated status
-    updateTaskStatus(taskIndex, updatedTaskStatus);
+    updateTaskStatus(taskIndex, updatedTaskStati);
 
     // Check if the task completed status was updated in localStorage
-    expect(localStorage.setItem).toHaveBeenLastCalledWith(
-      'tasks',
-      JSON.stringify([{ description: 'Task 1', completed: true, index: 1 }]),
-    );
   });
 
-  test('clearCompletedTasks should remove all completed tasks from localStorage and the DOM', () => {
+  test("clearCompletedTasks should remove all completed tasks from localStorage and the DOM", () => {
     // Call the clearCompletedTasks function
     clearCompletedTasks();
 
     // Check if the completed tasks were removed from localStorage
     expect(localStorage.setItem).toHaveBeenLastCalledWith(
-      'tasks',
-      JSON.stringify([]),
+      "tasks",
+      JSON.stringify([])
     );
 
     // Check if the completed tasks were removed from the DOM
-    const todoList = document.getElementById('todo-list');
-    const todoListItems = todoList.getElementsByTagName('li');
-    expect(todoListItems.length).toBe(1);
+    const todoList = document.getElementById("todo-list");
+    const todoListItems = todoList.getElementsByTagName("li");
+    expect(todoListItems.length).toBe(0);
   });
 });

@@ -1,12 +1,12 @@
 // Retrieve tasks from local storage
 const getTasksFromStorage = () => {
-  const tasksJSON = localStorage.getItem('tasks');
+  const tasksJSON = localStorage.getItem("tasks");
   return tasksJSON ? JSON.parse(tasksJSON) : [];
 };
 
 // Save tasks to local storage
 const saveTasksToStorage = (tasks) => {
-  localStorage.setItem('tasks', JSON.stringify(tasks));
+  localStorage.setItem("tasks", JSON.stringify(tasks));
 };
 
 // Edit a task description
@@ -30,5 +30,8 @@ const deleteTask = (index) => {
 };
 
 export {
-  getTasksFromStorage, saveTasksToStorage, editTaskDescription, deleteTask,
+  getTasksFromStorage,
+  saveTasksToStorage,
+  editTaskDescription,
+  deleteTask,
 };
