@@ -1,11 +1,15 @@
 import { getTasksFromStorage, saveTasksToStorage } from './taskModule.js';
 
 // Update task completion status
-const updateTaskStatus = (index, completed) => {
-  const tasks = getTasksFromStorage();
-  const task = tasks.find((task) => task.index === index);
-  if (task) {
-    task.completed = completed;
+const updateTaskStatus = (index, updatedStatus) => {
+  let tasks = getTasksFromStorage();
+  if (index !== -1) {
+    tasks = tasks.map((task) => {
+      if (task.index === index) {
+        task.completed = updatedStatus;
+      }
+      return task;
+    });
     saveTasksToStorage(tasks);
   }
 };

@@ -30,5 +30,8 @@ const deleteTask = (index) => {
 };
 
 export {
-  getTasksFromStorage, saveTasksToStorage, editTaskDescription, deleteTask,
+  getTasksFromStorage,
+  saveTasksToStorage,
+  editTaskDescription,
+  deleteTask,
 };

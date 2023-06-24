@@ -1,5 +1,7 @@
 import {
-  getTasksFromStorage, /* saveTasksToStorage, */ editTaskDescription, deleteTask,
+  getTasksFromStorage,
+  /* saveTasksToStorage, */ editTaskDescription,
+  deleteTask,
 } from './taskModule.js';
 import updateTaskStatus from './statusModule.js';
 

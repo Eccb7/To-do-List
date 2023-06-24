@@ -1,4 +1,3 @@
-
 <a name="readme-top"></a>
 
 <div align="center">
@@ -15,7 +14,6 @@
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#getting-started)
   - [Setup](#setup)
   - [Prerequisites](#prerequisites)
@@ -77,8 +75,8 @@
 
 In order to run this project you need:
 
-- web browser 
-- git-syn 
+- web browser
+- git-syn
 - code editor
 
 ### Setup
@@ -90,6 +88,7 @@ git clone https://github.com/Eccb7/To-do-List.git
 ### Install
 
 To install all dependencies, run:
+
 ```
 npm install
 ```
@@ -107,14 +106,19 @@ To run the project, follow these instructions:
 To run tests, run the following command:
 
 - Track HTML linter errors run:
+
 ```
 npx hint .
 ```
+
 - Track CSS linter errors run:
+
 ```
 npx stylelint "**/*.{css,scss}"
 ```
+
 - Track JavaScript linter errors run:
+
 ```
 npx eslint .
 ```
@@ -168,7 +172,6 @@ If you like this project give ⭐️
 I would like to thank my teammembers
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 <!-- LICENSE -->
 
